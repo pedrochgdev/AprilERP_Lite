@@ -1,0 +1,28 @@
+# Ignorar archivos y carpetas de compilación
+/build/
+/dist/
+/empty/
+/generated-sources/
+/nbproject/private/
+/test/
+
+# Ignorar dependencias compiladas, pero mantener las necesarias en lib/
+/lib/
+
+# Ignorar configuraciones y credenciales sensibles
+/wallet/
+*.jks
+*.sso
+*.p12
+*.pem
+ojdbc.properties
+sqlnet.ora
+tnsnames.ora
+
+# Ignorar archivos temporales y de NetBeans
+*.log
+*.class
+*.rs
+*.swp
+.DS_Store
+Thumbs.db
