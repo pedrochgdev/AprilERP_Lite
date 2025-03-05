@@ -496,16 +496,22 @@ public class VentanaVentas extends JFrame {
             return;
         }
 
-        String sql = "SELECT NOMBRE FROM ADMIN.PRENDAS WHERE ID_PRENDA = ?";
+        String sql = "SELECT NOMBRE, stock FROM ADMIN.PRENDAS WHERE ID_PRENDA = ?";
         try (ResultSet rs = dbHelper.ejecutarConsulta(sql, codigo)) { // ✅ Usar DBHelper
             if (rs.next()) {
                 String nombre = rs.getString("NOMBRE");
+                int stock = Integer.parseInt(rs.getString("stock"));
                 // Verificar si ya existe
-                for (int i = 0; i < detalleModel.getRowCount(); i++) {
-                    if (detalleModel.getValueAt(i, 0).equals(codigo)) {
-                        JOptionPane.showMessageDialog(null, "La prenda ya está en el carrito");
-                        return;
+                if(stock>0){
+                    for (int i = 0; i < detalleModel.getRowCount(); i++) {
+                        if (detalleModel.getValueAt(i, 0).equals(codigo)) {
+                            JOptionPane.showMessageDialog(null, "La prenda ya está en el carrito");
+                            return;
+                        }
                     }
+                }else{
+                    JOptionPane.showMessageDialog(null, "Stock Insuficiente");
+                    return;
                 }
 
                 // Agregar nueva fila con precio vacío
